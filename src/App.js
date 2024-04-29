@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import SingleCard from "./components/SingleCard";
+import coin_sfx from "./audio/coin_sfx.mp3"
 
 const cardImages = [
   { src: "/img/mario-1.png", matched: false },
@@ -9,6 +10,10 @@ const cardImages = [
   { src: "/img/luigi-1.png", matched: false },
   { src: "/img/dk-1.png", matched: false },
   { src: "/img/toad-1.png", matched: false },
+  { src: "/img/bowser-1.jpg", matched: false },
+  { src: "/img/goomba-1.jpg", matched: false },
+  { src: "/img/shyguy-1.png", matched: false },
+  { src: "/img/koopa-1.jpeg", matched: false },
 ];
 
 function App() {
@@ -18,6 +23,13 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
+
+
+  const startGame = () => {
+    shuffleCards();
+    new Audio(coin_sfx).play()
+  }
+
 
   //shuffle cards (start the game)
   const shuffleCards = () => {
@@ -75,8 +87,7 @@ function App() {
   return (
     <div className="App">
       <h1>Magic Memory Game</h1>
-      <button onClick={shuffleCards}>New Game</button>
-
+      <button onClick={startGame}>New Game</button>
       <div className="card-grid">
         {cards.map((card) => (
           <SingleCard
